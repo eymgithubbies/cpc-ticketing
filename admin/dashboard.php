@@ -96,6 +96,13 @@ $open_tickets = $conn->query($open_tickets_sql);
             align-items: center;
             gap: 15px;
         }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
         .user-avatar {
             width: 38px;
             height: 38px;
@@ -380,6 +387,154 @@ $open_tickets = $conn->query($open_tickets_sql);
             font-size: 13px;
             display: none;
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .navbar-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .navbar-menu a {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .navbar-user {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .page-header h1 {
+                font-size: 22px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 18px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .card h2 {
+                font-size: 18px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th, .table td {
+                padding: 10px 8px;
+            }
+
+            .notification-dropdown {
+                min-width: 280px;
+                max-width: 300px;
+                right: -100px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .navbar-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar-menu.show {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-brand {
+                font-size: 16px;
+            }
+
+            .navbar-brand img {
+                width: 28px;
+                height: 28px;
+            }
+
+            .navbar-menu {
+                gap: 8px;
+            }
+
+            .navbar-menu a {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
+            .page-header h1 {
+                font-size: 18px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .card h2 {
+                font-size: 16px;
+            }
+
+            .status-form-control {
+                font-size: 14px;
+            }
+
+            /* Make table scrollable on mobile */
+            .card {
+                overflow-x: auto;
+            }
+
+            .table {
+                min-width: 600px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -388,7 +543,8 @@ $open_tickets = $conn->query($open_tickets_sql);
             <img src="../Logi%20image/cpc.png" alt="CPC" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
             <span>IT HELPDESK</span>
         </div>
-        <div class="navbar-menu">
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
+        <div class="navbar-menu" id="navbarMenu">
             <a href="dashboard.php" class="active">📊 Dashboard</a>
             <a href="all_tickets.php">🎫 All Tickets</a>
             <a href="departments.php">🏢 Departments</a>
@@ -571,6 +727,11 @@ $open_tickets = $conn->query($open_tickets_sql);
     </div>
 
     <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('show');
+        }
+
         function toggleNotifications() {
             const dropdown = document.getElementById('notificationDropdown');
             dropdown.classList.toggle('show');

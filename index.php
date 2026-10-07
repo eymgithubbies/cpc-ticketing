@@ -255,6 +255,33 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
                 width: 90%;
                 max-width: 360px;
             }
+
+            .logo-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            #litheader {
+                font-size: 20px;
+            }
+
+            .inset, .p-container, .links-section {
+                padding: 0 20px;
+            }
+
+            input[type="text"], input[type="password"] {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            input[type="submit"] {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .system-info {
+                display: none;
+            }
         }
     </style>
 </head>
