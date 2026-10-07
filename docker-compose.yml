@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: cpc-ticketing-app
+    ports:
+      - "0.0.0.0:8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: cpc_ticketing
+      TZ: Asia/Manila
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: cpc-ticketing-db
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --default-time-zone=+08:00
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cpc_ticketing
+      MYSQL_USER: ticketing
+      MYSQL_PASSWORD: ticketingpass
+      TZ: Asia/Manila
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
